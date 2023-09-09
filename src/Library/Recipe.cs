@@ -19,6 +19,10 @@ namespace Full_GRASP_And_SOLID.Library
         {
             this.steps.Add(step);
         }
+        public ArrayList GetSteps()
+        {
+            return this.steps;
+        }
 
         public void RemoveStep(Step step)
         {

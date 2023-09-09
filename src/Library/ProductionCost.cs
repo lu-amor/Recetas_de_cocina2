@@ -3,7 +3,7 @@
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 //-------------------------------------------------------------------------------
-
+using System.Collections;
 namespace Full_GRASP_And_SOLID.Library
 {
     public class ProductionCost
