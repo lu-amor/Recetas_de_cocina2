@@ -14,8 +14,10 @@ namespace Full_GRASP_And_SOLID
     public class Program
     {
         private static ArrayList productCatalog = new ArrayList();
-
         private static ArrayList equipmentCatalog = new ArrayList();
+        public double productionCost = 0;
+        public double productCost = 0;
+        public double equipmentCost = 0;
 
         public static void Main(string[] args)
         {
@@ -25,7 +27,7 @@ namespace Full_GRASP_And_SOLID
             recipe.FinalProduct = GetProduct("Café con leche");
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
-            recipe.PrintRecipe();
+            Printer.Print(recipe);
         }
 
         private static void PopulateCatalogs()
@@ -37,7 +39,25 @@ namespace Full_GRASP_And_SOLID
             AddEquipmentToCatalog("Cafetera", 1000);
             AddEquipmentToCatalog("Hervidor", 2000);
         }
+        public void ProductionCost(Recipe recipe, double productionCost)
+        {
+            this.productionCost = productionCost;
+            ArrayList recipeSteps = recipe.GetSteps();
+        }
+        public static double GetProductionCost(double productionCost, double productCost, double equipmentCost, ArrayList recipeSteps)
+        {
 
+            foreach (Step step in recipeSteps)
+            {
+                productCost += GetProduct(step.Input.Description).UnitCost * step.Quantity;
+            }
+            foreach (Step step in recipeSteps)
+            {
+                equipmentCost += GetEquipment(step.Equipment.Description).HourlyCost * step.Time;
+            }
+            productionCost = productCost + equipmentCost;
+            return productionCost;
+        }
         private static void AddProductToCatalog(string description, double unitCost)
         {
             productCatalog.Add(new Product(description, unitCost));

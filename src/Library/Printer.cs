@@ -11,12 +11,7 @@ namespace Full_GRASP_And_SOLID.Library
 {
     public class Printer
     {
-        private double ProductionCost = 0;
-        public void SetProdCost(double prodCost)
-        {
-            this.ProductionCost = prodCost;
-        }
-        public Printer(Recipe recipe)
+        public static void Print(Recipe recipe)
         {
             ArrayList recipeSteps = recipe.GetSteps();
             Console.WriteLine($"Receta de {recipe.FinalProduct.Description}:");
@@ -24,7 +19,6 @@ namespace Full_GRASP_And_SOLID.Library
             {
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
-                Console.WriteLine($"El costo total es de ${ProductionCost}");
             }
         }
     }
